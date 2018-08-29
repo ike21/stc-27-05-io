@@ -1,33 +1,20 @@
 package ru.innopolis.stc12.homework.io;
 
-import java.io.*;
-import java.util.ArrayList;
-
 public class Main {
     public static void main(String[] args) {
 
-        String filename = "people.dat";
-        ArrayList<Employee> persons = new ArrayList<>();
-
-        persons.add(new Employee("Vas", 30, 30000, Job.JUNIOR));
-
-        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(filename))) {
-            objectOutputStream.writeObject(persons);
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-
-        ArrayList<Employee> newPersons = null;
-        try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(filename))) {
-            newPersons = (ArrayList<Employee>) objectInputStream.readObject();
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        for (Employee e : newPersons) {
-            System.out.println(e);
-        }
+        Employee employee = new Employee();
+        employee.save(new Employee("Masha", 20, 20000, Job.JUNIOR));
+        employee.save(new Employee("Sasha", 25, 35000, Job.JUNIOR));
+        employee.save(new Employee("Petya", 30, 60000, Job.MIDDLE));
+        employee.save(new Employee("Vasya", 50, 80000, Job.SENIOR));
+//
+//        employee.delete(new Employee("Vasya", 50, 80000, Job.SENIOR));
+//        employee.delete(new Employee("Vas3", 38, 60000, Job.JUNIOR));
+//        System.out.println(employee.getByName("Masha"));
+//        System.out.println(employee.getByJob(Job.SENIOR));
+//        employee.changeAllWork(Job.SENIOR,Job.JUNIOR);
+//        employee.saveOrUpdate(new Employee("Vasya", 100, 1, Job.MIDDLE));
+//        employee.delete(new Employee("Vasya", 50, 80000, Job.SENIOR));
     }
 }
